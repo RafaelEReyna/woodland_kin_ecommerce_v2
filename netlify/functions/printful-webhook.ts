@@ -18,7 +18,7 @@ export default async (req: Request, context: Context) => {
       const carrier = shipment?.carrier || null;
       const orderId = body.data?.order?.external_id || null;
 
-      console.log("[Printful Shipped]", JSON.stringify({
+      console.error("[Printful Shipped]", JSON.stringify({
         orderId,
         trackingNumber,
         carrier,

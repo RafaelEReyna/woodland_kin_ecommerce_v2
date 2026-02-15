@@ -198,3 +198,122 @@ hey -n 200 -c 50 -m POST \
 ```
 
 Target: p99 latency < 3s, 0% error rate under 50 concurrent users.
+
+---
+
+## Test Scripts Reference
+
+All scripts are in the `scripts/` directory. Run from the project root.
+
+| Script | Purpose | Usage |
+|---|---|---|
+| `test-checkout.sh` | Stripe checkout session creation (8 tests) | `./scripts/test-checkout.sh` |
+| `test-webhook.sh` | Stripe webhook event triggers via CLI | `./scripts/test-webhook.sh` |
+| `test-theme.sh` | Seasonal theme force + build verification | `./scripts/test-theme.sh --theme light` |
+| `test-printful-webhook.sh` | Simulated Printful shipping webhook | `./scripts/test-printful-webhook.sh` |
+| `test-klaviyo-subscribe.sh` | Email subscription endpoint (5 tests) | `./scripts/test-klaviyo-subscribe.sh` |
+| `test-e2e-pipeline.sh` | Full checkout → Printful → Klaviyo pipeline | `./scripts/test-e2e-pipeline.sh` |
+| `verify-variant-map.ts` | Printful variant mapping coverage report | `npx tsx scripts/verify-variant-map.ts` |
+| `load-test.sh` | Progressive concurrency load tests | `./scripts/load-test.sh` |
+| `lighthouse-audit.sh` | Lighthouse performance & accessibility scores | `./scripts/lighthouse-audit.sh` |
+| `pre-launch-check.sh` | Pre-deployment verification (10 checks) | `./scripts/pre-launch-check.sh` |
+| `post-deploy-smoke.sh` | Post-deployment URL health checks | `./scripts/post-deploy-smoke.sh --url https://woodlandkin.com` |
+
+### Variant Mapping Audit
+
+Before launch, run the variant map verifier to check coverage:
+
+```bash
+npx tsx scripts/verify-variant-map.ts
+```
+
+This generates a report showing how many of the 252 total variants (3 designs × 3 product types × 4 colors × 7 sizes) are mapped to real Printful sync variant IDs. Placeholder IDs in the 100000 range will be flagged as needing replacement.
+
+---
+
+## Load Testing (Phase 11G)
+
+### Setup
+
+Install the `hey` load testing tool:
+
+```bash
+# macOS
+brew install hey
+
+# or via Go
+go install github.com/rakyll/hey@latest
+```
+
+### Running Load Tests
+
+```bash
+# Ensure netlify dev is running, then:
+./scripts/load-test.sh
+```
+
+The script runs 3 progressive tiers:
+
+| Tier | Requests | Concurrency | Purpose |
+|---|---|---|---|
+| 1 (Warm-up) | 10 | 2 | Baseline, warm up Stripe connection |
+| 2 (Moderate) | 50 | 10 | Moderate load |
+| 3 (Target) | 200 | 50 | Target production load |
+| 3b (Multi-item) | 200 | 50 | Multi-item cart + free shipping path |
+
+**Target metrics:**
+- p99 latency < 3 seconds
+- 0% error rate (all responses status 200)
+
+**Stripe rate limits:** In test mode, Stripe limits to ~25 requests/second. If you see HTTP 429 errors, reduce concurrency. This is a Stripe test-mode limitation, not a code issue. Production mode allows higher throughput.
+
+### What to do if targets aren't met
+
+1. Check for Stripe 429 rate limiting first — reduce concurrency if needed
+2. If latency is high without rate limiting: check Netlify function cold start times
+3. If errors occur: check `netlify dev` terminal for unhandled exceptions
+4. Consider caching Stripe client initialization outside the handler if cold starts are slow
+
+---
+
+## Performance Audit (Phase 11G)
+
+### Setup
+
+Install the Lighthouse CLI:
+
+```bash
+npm install -g lighthouse
+```
+
+Requires Google Chrome installed on the system.
+
+### Running the Audit
+
+```bash
+# Ensure netlify dev is running, then:
+./scripts/lighthouse-audit.sh
+```
+
+The script audits 3 pages:
+- Home (`/`)
+- Shop (`/shop`)
+- Design detail (`/shop/bear-valley-crest`)
+
+**Target scores:** Performance >= 90, Accessibility >= 90
+
+### Reports
+
+Full HTML and JSON reports are saved to `reports/lighthouse-{page}-{timestamp}.html`. The JSON reports can be used for trend tracking over time.
+
+### Remediation guidance
+
+If scores are below 90:
+
+| Issue | Fix |
+|---|---|
+| Large JS bundle | Check React island hydration — switch `client:load` to `client:visible` where possible |
+| Layout shift (CLS) | Add explicit `width` and `height` to all images and placeholders |
+| Slow LCP | Ensure hero images/sections use eager loading, preconnect to external domains |
+| Missing labels | Add `<label>` to all form inputs, `aria-label` to icon buttons |
+| Color contrast | Verify theme CSS variables meet WCAG AA 4.5:1 ratio |

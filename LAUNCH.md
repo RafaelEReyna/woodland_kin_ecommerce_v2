@@ -1,8 +1,47 @@
 # Woodland Kin — Launch Checklist
 
+## Launch Day Runbook
+
+Follow these steps in order on launch day. Each step references the detailed sections below.
+
+```
+ #  Step                                    Script / Action
+──  ──────────────────────────────────────  ─────────────────────────────────────
+ 1  Run pre-launch checks                  ./scripts/pre-launch-check.sh
+ 2  Audit variant mapping                  npx tsx scripts/verify-variant-map.ts
+ 3  Update Printful variant map            Edit src/data/printful-map.ts (if needed)
+ 4  Commit any changes                     git add -A && git commit
+ 5  Configure DNS                          See Section 1 below
+ 6  Update env vars in Netlify             See Section 6 below
+ 7  Configure Stripe live webhook          See Section 2 below
+ 8  Verify Apple Pay domain                See Section 3 below
+ 9  Activate Klaviyo flows                 See Section 5 below
+10  Deploy to production                   netlify deploy --prod
+11  Run post-deploy smoke test             ./scripts/post-deploy-smoke.sh --url https://woodlandkin.com
+12  Complete one real test purchase         See Section 7 → Critical Path
+13  Verify dashboards (Stripe, Printful,   Manual check
+    Klaviyo)
+14  Refund the test order                  Stripe Dashboard → Payments → Refund
+15  Tag the release                        git tag -a v1.0.0 -m "Launch release"
+16  Push the tag                           git push origin v1.0.0
+17  Monitor for 48 hours                   See Post-Launch Monitoring
+```
+
+If any step fails, **stop and fix before continuing**. Do not skip steps.
+
+---
+
 ## Pre-Launch Requirements
 
 Ensure all items in `TESTING.md` pass before proceeding.
+
+Run the automated pre-launch check:
+
+```bash
+./scripts/pre-launch-check.sh
+```
+
+This verifies: clean git status, `.env` not tracked, `season.ts` using live date logic, build succeeds, no console.log in functions, robots.txt exists, Apple Pay file exists, no placeholder Printful IDs, and script permissions.
 
 ---
 
@@ -103,7 +142,15 @@ Update all environment variables in **Netlify Dashboard → Site Settings → En
 
 ## 7. Final Smoke Test
 
-Perform these tests on the **live production site** after all keys are swapped:
+First, run the automated smoke test:
+
+```bash
+./scripts/post-deploy-smoke.sh --url https://woodlandkin.com
+```
+
+This checks all page URLs return 200, sitemap and robots.txt are accessible, the Apple Pay verification file is served, and the API health endpoint responds.
+
+Then perform these **manual** tests on the **live production site** after all keys are swapped:
 
 ### Critical Path
 - [ ] Browse home page — loads correctly, no console errors

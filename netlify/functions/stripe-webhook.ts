@@ -47,11 +47,11 @@ export default async (req: Request, context: Context) => {
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
     const orderData = formatOrderForLog(session, lineItems.data);
 
-    console.log("[Order Received]", JSON.stringify(orderData, null, 2));
+    console.error("[Order Received]", JSON.stringify(orderData, null, 2));
 
     // Forward to Printful
     const printfulResult = await createPrintfulOrder(orderData);
-    console.log("[Printful]", JSON.stringify(printfulResult));
+    console.error("[Printful]", JSON.stringify(printfulResult));
     // TODO: implement retry queue for failed Printful orders
 
     // Track in Klaviyo

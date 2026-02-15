@@ -128,8 +128,72 @@ echo "--- Test 6: GET request — Should return 405 ---"
 curl -s -X GET "$ENDPOINT" | python3 -m json.tool 2>/dev/null || echo "(raw response above)"
 echo ""
 
+# ------------------------------------------
+# Test 7: Just under $100 threshold ($99.99 — standard shipping)
+# ------------------------------------------
+echo "--- Test 7: Just under \$100 (\$99.99) — Standard Shipping ---"
+curl -s -X POST "$ENDPOINT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "items": [
+      {
+        "variantId": "bear-valley-crest-long_sleeve-charcoal-m",
+        "designName": "Bear Valley Crest",
+        "productType": "long_sleeve",
+        "color": "Charcoal",
+        "size": "M",
+        "price": 4000,
+        "qty": 2
+      },
+      {
+        "variantId": "pine-ridge-sunset-tee-sand-l",
+        "designName": "Pine Ridge Sunset",
+        "productType": "tee",
+        "color": "Sand",
+        "size": "L",
+        "price": 1999,
+        "qty": 1
+      }
+    ],
+    "cartTotal": 9999
+  }' | python3 -m json.tool 2>/dev/null || echo "(raw response above)"
+echo ""
+
+# ------------------------------------------
+# Test 8: Large cart — 5 hoodies ($290 — free shipping)
+# ------------------------------------------
+echo "--- Test 8: 5x Hoodies (\$290.00) — Free Shipping ---"
+curl -s -X POST "$ENDPOINT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "items": [
+      {
+        "variantId": "woodland-original-hoodie-charcoal-m",
+        "designName": "Woodland Original",
+        "productType": "hoodie",
+        "color": "Charcoal",
+        "size": "M",
+        "price": 5800,
+        "qty": 3
+      },
+      {
+        "variantId": "bear-valley-crest-hoodie-forest-green-xl",
+        "designName": "Bear Valley Crest",
+        "productType": "hoodie",
+        "color": "Forest Green",
+        "size": "XL",
+        "price": 5800,
+        "qty": 2
+      }
+    ],
+    "cartTotal": 29000
+  }' | python3 -m json.tool 2>/dev/null || echo "(raw response above)"
+echo ""
+
 echo "========================================="
-echo " Tests complete."
+echo " Tests complete (8 total)."
 echo " Verify each response has a 'url' field"
 echo " (except Tests 5-6 which should error)."
+echo " Test 7 ($99.99) should show Standard Shipping."
+echo " Test 8 ($290) should show Free Shipping."
 echo "========================================="
