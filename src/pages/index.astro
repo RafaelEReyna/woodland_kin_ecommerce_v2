@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DesignCard from "../components/DesignCard.astro";
+import EmailCapture from "../components/EmailCapture";
+import { getCollection } from "astro:content";
+
+const designs = (await getCollection("designs"))
+  .filter((d) => d.data.active)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+---
+
+<BaseLayout title="Woodland Kin — Mountain Rooted Apparel">
+  <!-- Hero -->
+  <section class="bg-theme-surface">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+        Mountain Rooted. Community Worn.
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-theme-muted max-w-2xl mx-auto">
+        Apparel for families who find themselves in the forest. Designed in Big Bear Valley, CA — worn by the people who call the mountain home.
+      </p>
+      <a
+        href="/shop"
+        class="inline-block mt-10 px-8 py-3 bg-theme-accent text-theme-bg text-sm font-medium tracking-wide rounded hover:opacity-90 transition-opacity"
+      >
+        Shop the Collection
+      </a>
+    </div>
+  </section>
+
+  <!-- Brand Story -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">Our Story</h2>
+        <p class="text-theme-muted leading-relaxed mb-4">
+          Woodland Kin started around a campfire in Big Bear Valley. A group of families — hikers, makers, and mountain dwellers — wanted apparel that felt like the forest: grounded, unhurried, and built to last. Not another loud streetwear brand. Something quieter. Something that belonged here.
+        </p>
+        <p class="text-theme-muted leading-relaxed">
+          Every design is rooted in the landscapes and traditions of our mountain community. We work with local artists, print on demand to reduce waste, and donate a portion of proceeds to San Bernardino National Forest conservation. This isn't hype. It's home.
+        </p>
+      </div>
+      <div class="aspect-[4/3] bg-theme-surface rounded-lg flex items-center justify-center">
+        <span class="text-theme-muted text-sm"><!-- TODO: Replace placeholder images with real assets -->[Brand Story Image]</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Imagery -->
+  <section class="bg-theme-surface/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">The Community</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { caption: "Trail mornings in Big Bear" },
+          { caption: "Campfire gatherings" },
+          { caption: "Mountain family roots" },
+        ].map((item) => (
+          <div>
+            <div class="aspect-[4/5] bg-theme-surface rounded-lg flex items-center justify-center">
+              <span class="text-theme-muted text-sm"><!-- TODO: Replace placeholder images with real assets -->[Photo]</span>
+            </div>
+            <p class="mt-3 text-sm text-theme-muted text-center">{item.caption}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Designs -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Featured Designs</h2>
+    <p class="text-theme-muted text-center mb-12">20 designs. Rooted in the mountain.</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {designs.map((design) => (
+        <DesignCard
+          name={design.data.name}
+          slug={design.id.replace(/\.md$/, "")}
+          featuredImage={design.data.featured_image}
+        />
+      ))}
+    </div>
+    <div class="text-center mt-10">
+      <a
+        href="/shop"
+        class="text-sm font-medium text-theme-accent hover:underline"
+      >
+        View All &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Email Capture -->
+  <section class="bg-theme-surface">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Join the Kin</h2>
+      <p class="text-theme-muted mb-8">
+        First access to new drops, mountain stories, and community events. No spam — just the good stuff.
+      </p>
+      <EmailCapture client:visible />
+    </div>
+  </section>
+</BaseLayout>

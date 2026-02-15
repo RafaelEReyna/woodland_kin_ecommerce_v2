@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "./themes.css";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-theme-bg: var(--color-bg);
+  --color-theme-text: var(--color-text);
+  --color-theme-accent: var(--color-accent);
+  --color-theme-surface: var(--color-surface);
+  --color-theme-muted: var(--color-muted);
+}

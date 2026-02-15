@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Contact — Woodland Kin" description="Get in touch with Woodland Kin. Questions about orders, collaborations, or just want to say hey.">
+  <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Contact Us</h1>
+    <p class="text-theme-muted mb-10">
+      Questions about an order? Want to collaborate? Just want to say hey from the mountain? Drop us a line.
+    </p>
+
+    <form action="#" method="POST" class="space-y-6">
+      <div>
+        <label for="contact-name" class="block text-sm font-medium mb-2">Name</label>
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          required
+          class="w-full px-4 py-3 rounded bg-theme-surface border border-theme-muted/30 text-theme-text placeholder:text-theme-muted/60 focus:outline-none focus:border-theme-accent"
+          placeholder="Your name"
+        />
+      </div>
+
+      <div>
+        <label for="contact-email" class="block text-sm font-medium mb-2">Email</label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          required
+          class="w-full px-4 py-3 rounded bg-theme-surface border border-theme-muted/30 text-theme-text placeholder:text-theme-muted/60 focus:outline-none focus:border-theme-accent"
+          placeholder="your@email.com"
+        />
+      </div>
+
+      <div>
+        <label for="contact-message" class="block text-sm font-medium mb-2">Message</label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows="6"
+          required
+          class="w-full px-4 py-3 rounded bg-theme-surface border border-theme-muted/30 text-theme-text placeholder:text-theme-muted/60 focus:outline-none focus:border-theme-accent resize-y"
+          placeholder="What's on your mind?"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full px-6 py-3 bg-theme-accent text-theme-bg text-sm font-medium rounded hover:opacity-90 transition-opacity"
+      >
+        Send Message
+      </button>
+    </form>
+  </section>
+</BaseLayout>

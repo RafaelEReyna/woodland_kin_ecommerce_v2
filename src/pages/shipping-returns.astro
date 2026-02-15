@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Shipping & Returns — Woodland Kin" description="Woodland Kin shipping rates, delivery times, and return policy.">
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-3xl md:text-4xl font-bold mb-10">Shipping & Returns</h1>
+
+    <div class="space-y-12">
+      <!-- Shipping -->
+      <div>
+        <h2 class="text-xl font-bold mb-4">Shipping</h2>
+        <div class="space-y-4 text-sm text-theme-muted leading-relaxed">
+          <p>
+            All Woodland Kin orders are printed on demand and ship from our fulfillment partner in the US. We currently ship to all 50 states.
+          </p>
+          <div class="border border-theme-muted/20 rounded-lg overflow-hidden">
+            <table class="w-full text-left">
+              <thead class="bg-theme-surface">
+                <tr>
+                  <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Method</th>
+                  <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Cost</th>
+                  <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Delivery</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-theme-muted/10">
+                <tr>
+                  <td class="px-4 py-3">Standard Shipping</td>
+                  <td class="px-4 py-3">$7.99</td>
+                  <td class="px-4 py-3">3–7 business days</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">Free Shipping</td>
+                  <td class="px-4 py-3">$0 (orders over $100)</td>
+                  <td class="px-4 py-3">3–7 business days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            You'll receive a tracking number by email once your order ships. Most orders are produced and shipped within 3–5 business days.
+          </p>
+        </div>
+      </div>
+
+      <!-- Processing Times -->
+      <div>
+        <h2 class="text-xl font-bold mb-4">Processing Times</h2>
+        <div class="space-y-4 text-sm text-theme-muted leading-relaxed">
+          <p>
+            Because every item is printed on demand, there's a short production window before shipping. Here's what to expect:
+          </p>
+          <ul class="list-disc list-inside space-y-2">
+            <li>Production: 2–4 business days</li>
+            <li>Shipping: 3–7 business days after production</li>
+            <li>Total estimated delivery: 5–11 business days</li>
+          </ul>
+          <p>
+            During peak seasons or new collection drops, production may take an additional 1–2 days. We'll always keep you updated via email.
+          </p>
+        </div>
+      </div>
+
+      <!-- Returns -->
+      <div>
+        <h2 class="text-xl font-bold mb-4">Returns & Exchanges</h2>
+        <div class="space-y-4 text-sm text-theme-muted leading-relaxed">
+          <p>
+            Because our products are made to order, we can't accept returns based on size preference or change of mind. We strongly recommend checking our <a href="/size-guide" class="text-theme-accent hover:underline">Size Guide</a> before ordering.
+          </p>
+          <p>
+            <strong class="text-theme-text">Damaged or defective items:</strong> If your order arrives damaged or with a print defect, contact us within 14 days of delivery and we'll send a replacement at no charge. Include photos of the issue so we can get it resolved quickly.
+          </p>
+          <p>
+            <strong class="text-theme-text">Wrong item received:</strong> If we made a mistake on your order, reach out and we'll make it right — replacement shipped free.
+          </p>
+          <p>
+            To start a return or report an issue, visit our <a href="/contact" class="text-theme-accent hover:underline">Contact</a> page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqs = [
+  {
+    question: "How long does shipping take?",
+    answer: "Orders are printed on demand and typically ship within 3–5 business days. Once shipped, delivery takes 3–7 business days depending on your location within the US. You'll receive a tracking number by email as soon as your order ships.",
+  },
+  {
+    question: "Do you offer free shipping?",
+    answer: "Yes — all orders over $100 ship free within the US. For orders under $100, standard shipping is a flat $7.99. We don't currently ship internationally, but we're working on it.",
+  },
+  {
+    question: "What's your return policy?",
+    answer: "If your item arrives damaged or defective, we'll replace it at no cost. Because our products are printed on demand, we can't accept returns for size or preference — but we've got a detailed size guide to help you get the right fit before you order.",
+  },
+  {
+    question: "What blanks do you print on?",
+    answer: "We use premium heavyweight cotton blanks that are pre-shrunk and built to last. Our tees, long sleeves, and hoodies are selected for comfort, durability, and a fit that works whether you're on the trail or in town.",
+  },
+  {
+    question: "Are your products sustainable?",
+    answer: "We print on demand, which means no excess inventory and zero overproduction waste. We also donate a portion of every sale to San Bernardino National Forest conservation. We're always looking for ways to reduce our footprint further.",
+  },
+  {
+    question: "Can I collaborate with Woodland Kin?",
+    answer: "We love working with local artists, photographers, and community organizations in the Big Bear Valley area. If you've got an idea, hit us up on the contact page — we're always open to conversations.",
+  },
+];
+---
+
+<BaseLayout title="FAQ — Woodland Kin" description="Frequently asked questions about Woodland Kin orders, shipping, returns, and more.">
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-3xl md:text-4xl font-bold mb-10">Frequently Asked Questions</h1>
+
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group border border-theme-muted/20 rounded-lg">
+          <summary class="flex items-center justify-between cursor-pointer px-6 py-4 text-sm font-medium select-none">
+            <span>{faq.question}</span>
+            <span class="ml-4 shrink-0 text-theme-muted transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-4 text-sm text-theme-muted leading-relaxed">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

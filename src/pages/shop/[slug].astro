@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductConfigurator from "../../components/ProductConfigurator";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const designs = await getCollection("designs");
+  return designs.map((design) => ({
+    params: { slug: design.id.replace(/\.md$/, "") },
+    props: { design },
+  }));
+}
+
+const { design } = Astro.props;
+const { Content } = await render(design);
+const slug = design.id.replace(/\.md$/, "");
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://woodlandkin.com";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: design.data.name,
+  description: design.data.story,
+  brand: { "@type": "Brand", name: "Woodland Kin" },
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "25.00",
+    highPrice: "58.00",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+  url: `${siteUrl}/shop/${slug}`,
+};
+---
+
+<BaseLayout title={`${design.data.name} — Woodland Kin`} description={design.data.story}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <!-- Product Layout -->
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <!-- Left: Hero Mockup -->
+      <div class="aspect-square bg-theme-surface rounded-lg flex items-center justify-center">
+        <span class="text-theme-muted text-sm"><!-- TODO: Replace placeholder images with real assets -->[{design.data.name} Mockup]</span>
+      </div>
+
+      <!-- Right: Product Configurator -->
+      <div>
+        <p class="mb-4 text-sm text-theme-muted">{design.data.story}</p>
+        <ProductConfigurator
+          client:load
+          designSlug={slug}
+          designName={design.data.name}
+        />
+      </div>
+    </div>
+
+    <!-- Design Story -->
+    <div class="mt-20 max-w-3xl">
+      <div class="prose prose-neutral dark:prose-invert max-w-none text-theme-muted [&_h2]:text-theme-text [&_strong]:text-theme-text">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

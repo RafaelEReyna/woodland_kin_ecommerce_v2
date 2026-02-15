@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CartDrawer from "../components/CartDrawer";
+import { getTheme } from "../lib/season";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = "Mountain rooted apparel from Big Bear Valley, CA.", ogImage = "/og-default.jpg" } = Astro.props;
+const theme = getTheme();
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://woodlandkin.com";
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+---
+
+<html lang="en" class={`theme-${theme}`}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content="Woodland Kin" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://js.stripe.com" />
+    <link rel="preconnect" href="https://static.klaviyo.com" />
+
+    <title>{title}</title>
+    {import.meta.env.PUBLIC_KLAVIYO_PUBLIC_KEY && (
+      <script async src={`https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${import.meta.env.PUBLIC_KLAVIYO_PUBLIC_KEY}`}></script>
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col bg-theme-bg text-theme-text">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:px-4 focus:py-2 focus:bg-theme-accent focus:text-theme-bg focus:rounded">
+      Skip to content
+    </a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <CartDrawer client:load />
+  </body>
+</html>

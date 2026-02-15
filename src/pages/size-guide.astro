@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sizes = [
+  { size: "XS", chest: '31–34"', length: '27"', sleeve: '8"' },
+  { size: "S", chest: '34–37"', length: '28"', sleeve: '8.25"' },
+  { size: "M", chest: '38–41"', length: '29"', sleeve: '8.5"' },
+  { size: "L", chest: '42–45"', length: '30"', sleeve: '8.75"' },
+  { size: "XL", chest: '46–49"', length: '31"', sleeve: '9"' },
+  { size: "2XL", chest: '50–53"', length: '32"', sleeve: '9.25"' },
+  { size: "3XL", chest: '54–57"', length: '33"', sleeve: '9.5"' },
+];
+---
+
+<BaseLayout title="Size Guide — Woodland Kin" description="Find your perfect fit with the Woodland Kin size guide. Measurements for XS through 3XL.">
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Size Guide</h1>
+    <p class="text-theme-muted mb-10">
+      All measurements are in inches. Our blanks are pre-shrunk and run true to size. When in doubt, size up — mountain layers work best with a little room.
+    </p>
+
+    <!-- Tee / Long Sleeve -->
+    <div class="mb-12">
+      <h2 class="text-xl font-bold mb-4">Tee & Long Sleeve</h2>
+      <div class="border border-theme-muted/20 rounded-lg overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-theme-surface">
+            <tr>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Size</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Chest</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Length</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Sleeve</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-theme-muted/10 text-theme-muted">
+            {sizes.map((row) => (
+              <tr>
+                <td class="px-4 py-3 font-medium text-theme-text">{row.size}</td>
+                <td class="px-4 py-3">{row.chest}</td>
+                <td class="px-4 py-3">{row.length}</td>
+                <td class="px-4 py-3">{row.sleeve}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Hoodie -->
+    <div class="mb-12">
+      <h2 class="text-xl font-bold mb-4">Hoodie</h2>
+      <div class="border border-theme-muted/20 rounded-lg overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-theme-surface">
+            <tr>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Size</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Chest</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Length</th>
+              <th class="px-4 py-3 text-xs font-medium uppercase tracking-wide text-theme-muted">Sleeve (Full)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-theme-muted/10 text-theme-muted">
+            {[
+              { size: "XS", chest: '32–35"', length: '26"', sleeve: '33"' },
+              { size: "S", chest: '35–38"', length: '27"', sleeve: '33.5"' },
+              { size: "M", chest: '39–42"', length: '28"', sleeve: '34"' },
+              { size: "L", chest: '43–46"', length: '29"', sleeve: '34.5"' },
+              { size: "XL", chest: '47–50"', length: '30"', sleeve: '35"' },
+              { size: "2XL", chest: '51–54"', length: '31"', sleeve: '35.5"' },
+              { size: "3XL", chest: '55–58"', length: '32"', sleeve: '36"' },
+            ].map((row) => (
+              <tr>
+                <td class="px-4 py-3 font-medium text-theme-text">{row.size}</td>
+                <td class="px-4 py-3">{row.chest}</td>
+                <td class="px-4 py-3">{row.length}</td>
+                <td class="px-4 py-3">{row.sleeve}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- How to Measure -->
+    <div>
+      <h2 class="text-xl font-bold mb-4">How to Measure</h2>
+      <ul class="space-y-3 text-sm text-theme-muted leading-relaxed">
+        <li><strong class="text-theme-text">Chest:</strong> Measure around the fullest part of your chest, keeping the tape level.</li>
+        <li><strong class="text-theme-text">Length:</strong> Measure from the highest point of the shoulder to the bottom hem.</li>
+        <li><strong class="text-theme-text">Sleeve (Tee):</strong> Measure from the shoulder seam to the end of the sleeve.</li>
+        <li><strong class="text-theme-text">Sleeve (Hoodie):</strong> Measure from the center back neck to the end of the cuff.</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
