@@ -63,7 +63,9 @@ hey -n 10 -c 2 -m POST \
 echo ""
 echo "--- Tier 1 complete. Review results above. ---"
 echo ""
-read -p "Continue to Tier 2? (Enter to continue, Ctrl+C to stop) "
+if [ -t 0 ]; then
+  read -p "Continue to Tier 2? (Enter to continue, Ctrl+C to stop) "
+fi
 echo ""
 
 # ------------------------------------------
@@ -88,7 +90,9 @@ echo "Target check:"
 echo "  - p99 latency < 3s"
 echo "  - 0% error rate (all status 200)"
 echo ""
-read -p "Continue to Tier 3 (target load)? (Enter to continue, Ctrl+C to stop) "
+if [ -t 0 ]; then
+  read -p "Continue to Tier 3 (target load)? (Enter to continue, Ctrl+C to stop) "
+fi
 echo ""
 
 # ------------------------------------------

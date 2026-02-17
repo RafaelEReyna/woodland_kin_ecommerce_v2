@@ -32,7 +32,7 @@ RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$ENDPOINT" \
   -d "{\"email\": \"$TEST_EMAIL\"}")
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-BODY=$(echo "$RESPONSE" | head -n -1)
+BODY=$(echo "$RESPONSE" | sed '$d')
 
 echo "Status: $HTTP_CODE"
 echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
@@ -54,7 +54,7 @@ RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$ENDPOINT" \
   -d "{\"email\": \"$TEST_EMAIL\"}")
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-BODY=$(echo "$RESPONSE" | head -n -1)
+BODY=$(echo "$RESPONSE" | sed '$d')
 
 echo "Status: $HTTP_CODE"
 echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
@@ -76,7 +76,7 @@ RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$ENDPOINT" \
   -d '{"email": "notanemail"}')
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-BODY=$(echo "$RESPONSE" | head -n -1)
+BODY=$(echo "$RESPONSE" | sed '$d')
 
 echo "Status: $HTTP_CODE"
 echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
@@ -100,7 +100,7 @@ RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$ENDPOINT" \
   -d '{}')
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-BODY=$(echo "$RESPONSE" | head -n -1)
+BODY=$(echo "$RESPONSE" | sed '$d')
 
 echo "Status: $HTTP_CODE"
 echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"
@@ -122,7 +122,7 @@ echo "--- Test 5: GET request (should return 405) ---"
 RESPONSE=$(curl -s -w "\n%{http_code}" -X GET "$ENDPOINT")
 
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-BODY=$(echo "$RESPONSE" | head -n -1)
+BODY=$(echo "$RESPONSE" | sed '$d')
 
 echo "Status: $HTTP_CODE"
 echo "$BODY" | python3 -m json.tool 2>/dev/null || echo "$BODY"

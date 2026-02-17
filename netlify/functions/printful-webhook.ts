@@ -16,7 +16,7 @@ export default async (req: Request, context: Context) => {
       const shipment = body.data?.shipment;
       const trackingNumber = shipment?.tracking_number || null;
       const carrier = shipment?.carrier || null;
-      const orderId = body.data?.order?.external_id || null;
+      const orderId = shipment?.order?.external_id || null;
 
       console.error("[Printful Shipped]", JSON.stringify({
         orderId,
@@ -25,7 +25,7 @@ export default async (req: Request, context: Context) => {
       }));
 
       // Track shipping in Klaviyo
-      const customerEmail = body.data?.order?.recipient?.email;
+      const customerEmail = shipment?.order?.recipient?.email;
       if (customerEmail) {
         await trackEvent("Order Shipped", customerEmail, {
           trackingNumber,

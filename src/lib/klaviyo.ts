@@ -51,7 +51,7 @@ export async function subscribeToList(
   }
 
   try {
-    const res = await fetch(`${KLAVIYO_API_URL}/lists/${listId}/relationships/profiles/`, {
+    const res = await fetch(`${KLAVIYO_API_URL}/profile-subscription-bulk-create-jobs/`, {
       method: "POST",
       headers: {
         Authorization: `Klaviyo-API-Key ${apiKey}`,
@@ -59,12 +59,36 @@ export async function subscribeToList(
         revision: "2024-02-15",
       },
       body: JSON.stringify({
-        data: [
-          {
-            type: "profile",
-            attributes: { email },
+        data: {
+          type: "profile-subscription-bulk-create-job",
+          attributes: {
+            profiles: {
+              data: [
+                {
+                  type: "profile",
+                  attributes: {
+                    email,
+                    subscriptions: {
+                      email: {
+                        marketing: {
+                          consent: "SUBSCRIBED",
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+            },
           },
-        ],
+          relationships: {
+            list: {
+              data: {
+                type: "list",
+                id: listId,
+              },
+            },
+          },
+        },
       }),
     });
 
