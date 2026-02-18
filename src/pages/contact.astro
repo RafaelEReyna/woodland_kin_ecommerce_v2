@@ -10,6 +10,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </p>
 
     <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+      <input type="hidden" name="form-name" value="contact" />
       <div>
         <label for="contact-name" class="block text-sm font-medium mb-2">Name</label>
         <input
