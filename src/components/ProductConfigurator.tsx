@@ -3,7 +3,7 @@ import ProductTypeSelector from "./ProductTypeSelector";
 import ColorSelector from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
 import { getPrice, formatPrice } from "../lib/pricing";
-import { generateVariantId } from "../lib/variants";
+import { generateVariantId, getColorsForProductType } from "../lib/variants";
 import { addToCart } from "../stores/cart";
 import type { ProductType } from "../lib/pricing";
 
@@ -14,12 +14,21 @@ interface Props {
 
 export default function ProductConfigurator({ designSlug, designName }: Props) {
   const [productType, setProductType] = useState<ProductType>("tee");
-  const [color, setColor] = useState("Charcoal");
+  const [color, setColor] = useState("Black");
   const [size, setSize] = useState("M");
   const [feedback, setFeedback] = useState("");
 
+  const availableColors = getColorsForProductType(productType);
   const price = getPrice(productType);
   const variantId = generateVariantId(designSlug, productType, color, size);
+
+  function handleProductTypeChange(newType: ProductType) {
+    setProductType(newType);
+    const newColors = getColorsForProductType(newType);
+    if (!newColors.includes(color)) {
+      setColor(newColors[0]);
+    }
+  }
 
   function handleAddToCart() {
     addToCart({ variantId, designName, productType, color, size, price });
@@ -34,8 +43,8 @@ export default function ProductConfigurator({ designSlug, designName }: Props) {
       <p className="mt-2 text-xl text-[var(--color-muted)]">{formatPrice(price)}</p>
 
       <div className="mt-8 space-y-6">
-        <ProductTypeSelector selectedType={productType} onChange={setProductType} />
-        <ColorSelector selectedColor={color} onChange={setColor} />
+        <ProductTypeSelector selectedType={productType} onChange={handleProductTypeChange} />
+        <ColorSelector colors={availableColors} selectedColor={color} onChange={setColor} />
         <SizeSelector selectedSize={size} onChange={setSize} />
       </div>
 

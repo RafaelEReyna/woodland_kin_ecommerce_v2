@@ -2,9 +2,13 @@ import type { ProductType } from "./pricing";
 
 export const PRODUCT_TYPES: ProductType[] = ["tee", "long_sleeve", "hoodie"];
 
-export const COLORS = ["Charcoal", "Forest Green", "Sand", "Faded Navy"] as const;
+export const COLORS_BY_PRODUCT_TYPE: Record<ProductType, readonly string[]> = {
+  tee: ["Black", "Navy", "Forest Green", "Dark Chocolate", "Charcoal"] as const,
+  long_sleeve: ["Black", "Navy", "Forest Green", "Military Green"] as const,
+  hoodie: ["Black", "Navy", "Forest Green", "Charcoal"] as const,
+};
 
-export const SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL"] as const;
+export const SIZES = ["S", "M", "L", "XL", "2XL", "3XL"] as const;
 
 export type Variant = {
   variantId: string;
@@ -13,6 +17,10 @@ export type Variant = {
   color: string;
   size: string;
 };
+
+export function getColorsForProductType(productType: ProductType): readonly string[] {
+  return COLORS_BY_PRODUCT_TYPE[productType];
+}
 
 export function generateVariantId(
   designSlug: string,
@@ -28,7 +36,7 @@ export function generateVariantId(
 export function generateAllVariants(designSlug: string): Variant[] {
   const variants: Variant[] = [];
   for (const productType of PRODUCT_TYPES) {
-    for (const color of COLORS) {
+    for (const color of COLORS_BY_PRODUCT_TYPE[productType]) {
       for (const size of SIZES) {
         variants.push({
           variantId: generateVariantId(designSlug, productType, color, size),

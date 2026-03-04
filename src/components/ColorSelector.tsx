@@ -1,17 +1,19 @@
 const COLOR_MAP: Record<string, string> = {
-  Charcoal: "#4A4A4A",
+  Black: "#1A1A1A",
+  Navy: "#1F2937",
   "Forest Green": "#4A7C59",
-  Sand: "#C9B99A",
-  "Faded Navy": "#5B6E82",
+  "Dark Chocolate": "#3E2723",
+  Charcoal: "#4A4A4A",
+  "Military Green": "#4B5320",
 };
 
 interface Props {
+  colors: readonly string[];
   selectedColor: string;
   onChange: (color: string) => void;
 }
 
-export default function ColorSelector({ selectedColor, onChange }: Props) {
-  const colors = Object.keys(COLOR_MAP);
+export default function ColorSelector({ colors, selectedColor, onChange }: Props) {
 
   return (
     <div>
@@ -33,7 +35,7 @@ export default function ColorSelector({ selectedColor, onChange }: Props) {
                   : "hover:ring-2 hover:ring-[var(--color-muted)] hover:ring-offset-1"
               }`}
               style={{
-                backgroundColor: COLOR_MAP[color],
+                backgroundColor: COLOR_MAP[color] || "#888",
                 ringOffsetColor: "var(--color-bg)",
               }}
             />
