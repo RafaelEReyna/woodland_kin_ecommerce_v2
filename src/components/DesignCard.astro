@@ -9,8 +9,8 @@ const { name, slug, featuredImage } = Astro.props;
 ---
 
 <a href={`/shop/${slug}`} class="group block">
-  <div class="aspect-[4/5] bg-theme-surface rounded-lg flex items-center justify-center overflow-hidden group-hover:scale-[1.02] group-hover:shadow-lg transition-all duration-200">
-    <span class="text-theme-muted text-sm"><!-- TODO: Replace placeholder images with real assets -->[{name}]</span>
+  <div class="aspect-[4/5] bg-theme-surface rounded-lg overflow-hidden group-hover:scale-[1.02] group-hover:shadow-lg transition-all duration-200">
+    <img src={featuredImage} alt={name} class="w-full h-full object-cover" loading="lazy" />
   </div>
   <h3 class="mt-3 text-sm font-medium">{name}</h3>
   <p class="text-sm text-theme-muted">From $25</p>

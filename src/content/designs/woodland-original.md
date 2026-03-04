@@ -1,7 +1,7 @@
 ---
 name: "Woodland Original"
 story: "The founding design — simple wordmark, clean lines. The one that started everything."
-featured_image: "/images/designs/woodland-original.jpg"
+featured_image: "/images/designs/woodland-original.png"
 active: true
 order: 3
 ---

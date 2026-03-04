@@ -1,7 +1,7 @@
 ---
 name: "Pine Ridge Sunset"
 story: "Inspired by the golden hour light that hits the ridge above Fawnskin every evening from May through September."
-featured_image: "/images/designs/pine-ridge-sunset.jpg"
+featured_image: "/images/designs/pine-ridge-sunset.png"
 active: true
 order: 2
 ---

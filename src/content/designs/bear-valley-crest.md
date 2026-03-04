@@ -1,7 +1,7 @@
 ---
 name: "Bear Valley Crest"
 story: "The original Big Bear emblem — a nod to the families who built this town and the valley that raised them."
-featured_image: "/images/designs/bear-valley-crest.jpg"
+featured_image: "/images/designs/bear-valley-crest.png"
 active: true
 order: 1
 ---

@@ -39,8 +39,8 @@ const jsonLd = {
     <!-- Product Layout -->
     <div class="grid md:grid-cols-2 gap-12 items-start">
       <!-- Left: Hero Mockup -->
-      <div class="aspect-square bg-theme-surface rounded-lg flex items-center justify-center">
-        <span class="text-theme-muted text-sm"><!-- TODO: Replace placeholder images with real assets -->[{design.data.name} Mockup]</span>
+      <div class="aspect-square bg-theme-surface rounded-lg overflow-hidden">
+        <img src={design.data.featured_image} alt={`${design.data.name} mockup`} class="w-full h-full object-cover" />
       </div>
 
       <!-- Right: Product Configurator -->
