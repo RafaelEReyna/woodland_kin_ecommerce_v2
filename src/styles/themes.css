@@ -1,19 +1,241 @@
-/* Woodland Kin — Seasonal Theme System */
+/*
+ * ═══════════════════════════════════════════════════════════════════
+ *  WOODLAND KIN — BRAND COLOR SYSTEM
+ *  Built on Split-Complementary Color Theory
+ * ═══════════════════════════════════════════════════════════════════
+ *
+ *  THEORY RATIONALE:
+ *  The brand doctrine names three emotional poles: rugged, cozy, proud.
+ *  A split-complementary palette handles all three:
+ *
+ *    ROOT HUE       → Forest Green (nature, belonging, the mountain)
+ *    COMPLEMENT 1   → Muted Rust Red (warmth, fire, Americana grit)
+ *    COMPLEMENT 2   → Midnight Blue (night sky, cold air, depth)
+ *    NEUTRALS       → Cream + Charcoal + Winter Gray (the cabin itself)
+ *
+ *  This avoids the "generic web" look because:
+ *  - No pure whites or blacks (everything is temperature-shifted)
+ *  - Accent colors are DESATURATED (vintage, worn, honest — not digital)
+ *  - Dark theme uses green-tinted darks, not flat gray (feels like pine)
+ *  - Light theme uses amber-warm cream, not clinical white
+ *
+ * ═══════════════════════════════════════════════════════════════════
+ *  MASTER PALETTE (raw values — do not use directly in components)
+ * ═══════════════════════════════════════════════════════════════════ */
 
-/* Light theme: April – September (sand, lilac accent) */
-.theme-light {
-  --color-bg: #F5F0E8;
-  --color-text: #2C2C2C;
-  --color-accent: #B8A9C9;
-  --color-surface: #FFFFFF;
-  --color-muted: #8C8272;
+:root {
+  /* Forest Greens */
+  --raw-green-900: #1A2E1C;   /* dark pine shadow */
+  --raw-green-700: #2F5233;   /* deep forest — primary brand anchor */
+  --raw-green-500: #4A7C59;   /* mid moss */
+  --raw-green-300: #7FAF8A;   /* sage highlight */
+  --raw-green-100: #D6E8DA;   /* frost on pine */
+
+  /* Midnight Blues */
+  --raw-blue-900: #0E1829;    /* deep night sky */
+  --raw-blue-700: #1B2A4A;    /* true midnight */
+  --raw-blue-500: #2E4470;    /* dusk ridge */
+  --raw-blue-300: #6680A8;    /* winter haze */
+  --raw-blue-100: #C8D3E5;    /* snow shadow */
+
+  /* Rust Reds (Americana, campfire, worn iron) */
+  --raw-rust-900: #5C1F0E;    /* char */
+  --raw-rust-700: #8B3520;    /* old barn */
+  --raw-rust-500: #9B4A2E;    /* muted rust — Americana accent */
+  --raw-rust-300: #C47B5A;    /* warm copper */
+  --raw-rust-100: #EDD5C5;    /* ember glow */
+
+  /* Neutrals — temperature-shifted, never pure */
+  --raw-cream-50:  #FAF6EF;   /* warm near-white (surface) */
+  --raw-cream-100: #F2EBD9;   /* base cream (light bg) */
+  --raw-cream-200: #E0D5C0;   /* aged paper */
+  --raw-cream-300: #C9BAA2;   /* worn canvas */
+
+  --raw-charcoal-200: #3E3E3B; /* warm dark surface */
+  --raw-charcoal-300: #2E2E2B; /* warm charcoal bg */
+  --raw-charcoal-400: #1E1F1C; /* near-black (green-tinted — feels like pine) */
+
+  --raw-gray-winter-100: #E2E5E8; /* soft winter sky */
+  --raw-gray-winter-300: #A8B0B8; /* overcast */
+  --raw-gray-winter-500: #6B7580; /* slate stone */
+  --raw-gray-winter-700: #3C444C; /* wet rock */
 }
 
-/* Dark theme: October – March (charcoal, forest green accent) */
-.theme-dark {
-  --color-bg: #2C2C2C;
-  --color-text: #F5F0E8;
-  --color-accent: #4A7C59;
-  --color-surface: #3A3A3A;
-  --color-muted: #A09888;
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  LIGHT THEME  |  April – September  |  "Mountain Morning"
+ *  Feel: Warm sunlight through pine, worn canvas, afternoon porch
+ * ═══════════════════════════════════════════════════════════════════ */
+
+[data-theme="light"], .theme-light {
+
+  /* ── Backgrounds ─────────────────────────────────────────── */
+  --color-bg:            var(--raw-cream-100);   /* #F2EBD9 — warm aged cream */
+  --color-bg-subtle:     var(--raw-cream-200);   /* #E0D5C0 — slightly deeper for sections */
+  --color-surface:       var(--raw-cream-50);    /* #FAF6EF — cards, modals, inputs */
+  --color-surface-raised: #FFFFFF;               /* pure white only for highest elevation */
+
+  /* ── Text ────────────────────────────────────────────────── */
+  --color-text:          var(--raw-charcoal-300); /* #2E2E2B — warm near-black (not cold) */
+  --color-text-muted:    #7A6D5C;                 /* warm brownish gray */
+  --color-text-subtle:   #A39585;                 /* placeholder, disabled */
+  --color-text-inverse:  var(--raw-cream-100);    /* for dark backgrounds */
+
+  /* ── Brand Accents ───────────────────────────────────────── */
+  --color-accent:        var(--raw-rust-500);     /* #9B4A2E — Americana rust (REPLACES lilac) */
+  --color-accent-hover:  var(--raw-rust-700);     /* #8B3520 — darker on hover */
+  --color-accent-subtle: var(--raw-rust-100);     /* #EDD5C5 — tinted bg for badges/tags */
+
+  --color-primary:       var(--raw-green-700);    /* #2F5233 — forest green — CTAs, links */
+  --color-primary-hover: var(--raw-green-900);    /* #1A2E1C — hover state */
+  --color-primary-subtle: var(--raw-green-100);   /* #D6E8DA — tinted bg */
+
+  --color-secondary:     var(--raw-blue-700);     /* #1B2A4A — midnight blue — secondary actions */
+  --color-secondary-subtle: var(--raw-blue-100);  /* #C8D3E5 */
+
+  /* ── Borders & Dividers ──────────────────────────────────── */
+  --color-border:        var(--raw-cream-300);    /* #C9BAA2 — warm, visible but subtle */
+  --color-border-strong: #A39280;                 /* for focused inputs, card outlines */
+
+  /* ── Feedback States ─────────────────────────────────────── */
+  --color-success:       var(--raw-green-500);    /* #4A7C59 */
+  --color-warning:       #B8860B;                 /* dark goldenrod — fits Americana */
+  --color-error:         var(--raw-rust-700);     /* #8B3520 — errors in brand palette */
+  --color-info:          var(--raw-blue-500);     /* #2E4470 */
+
+  /* ── Shadows (warm-tinted, not neutral gray) ─────────────── */
+  --shadow-sm:  0 1px 3px rgba(46, 30, 16, 0.10);
+  --shadow-md:  0 4px 12px rgba(46, 30, 16, 0.14);
+  --shadow-lg:  0 8px 24px rgba(46, 30, 16, 0.18);
+  --shadow-xl:  0 16px 40px rgba(46, 30, 16, 0.22);
+
+  /* ── Texture Overlay (optional grain effect) ─────────────── */
+  --texture-opacity: 0.025;   /* very subtle noise over surfaces */
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  DARK THEME  |  October – March  |  "Cabin Night"
+ *  Feel: Pine forest at dusk, warm lantern inside, cold outside
+ * ═══════════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"], .theme-dark {
+
+  /* ── Backgrounds ─────────────────────────────────────────── */
+  --color-bg:            var(--raw-charcoal-400); /* #1E1F1C — green-black (feels like pine, not UI) */
+  --color-bg-subtle:     var(--raw-charcoal-300); /* #2E2E2B — section alternates */
+  --color-surface:       var(--raw-charcoal-200); /* #3E3E3B — cards, modals, inputs */
+  --color-surface-raised: #4A4A47;                /* highest elevation elements */
+
+  /* ── Text ────────────────────────────────────────────────── */
+  --color-text:          var(--raw-cream-100);    /* #F2EBD9 — warm cream text (not cold white) */
+  --color-text-muted:    #B0A390;                 /* warm gray-tan */
+  --color-text-subtle:   #7A7060;                 /* placeholder, disabled */
+  --color-text-inverse:  var(--raw-charcoal-300); /* for light-bg elements */
+
+  /* ── Brand Accents ───────────────────────────────────────── */
+  --color-accent:        var(--raw-rust-300);     /* #C47B5A — copper/ember (reads well on dark) */
+  --color-accent-hover:  var(--raw-rust-500);     /* #9B4A2E */
+  --color-accent-subtle: rgba(155, 74, 46, 0.15); /* very dark rust tint */
+
+  --color-primary:       var(--raw-green-300);    /* #7FAF8A — lighter sage (accessible on dark) */
+  --color-primary-hover: var(--raw-green-500);    /* #4A7C59 */
+  --color-primary-subtle: rgba(74, 124, 89, 0.15);
+
+  --color-secondary:     var(--raw-blue-300);     /* #6680A8 — soft dusk blue on dark */
+  --color-secondary-subtle: rgba(27, 42, 74, 0.30);
+
+  /* ── Borders & Dividers ──────────────────────────────────── */
+  --color-border:        rgba(242, 235, 217, 0.10); /* subtle warm line */
+  --color-border-strong: rgba(242, 235, 217, 0.22);
+
+  /* ── Feedback States ─────────────────────────────────────── */
+  --color-success:       var(--raw-green-300);    /* #7FAF8A */
+  --color-warning:       #D4A017;                 /* amber — lantern warm */
+  --color-error:         var(--raw-rust-300);     /* #C47B5A */
+  --color-info:          var(--raw-blue-300);     /* #6680A8 */
+
+  /* ── Shadows (deeper, cooler — cold mountain night) ─────── */
+  --shadow-sm:  0 1px 3px rgba(10, 12, 10, 0.30);
+  --shadow-md:  0 4px 12px rgba(10, 12, 10, 0.45);
+  --shadow-lg:  0 8px 24px rgba(10, 12, 10, 0.55);
+  --shadow-xl:  0 16px 40px rgba(10, 12, 10, 0.65);
+
+  --texture-opacity: 0.04;    /* slightly more grain feels gritty/authentic in dark mode */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  SEMANTIC COMPONENT ALIASES
+ *  Map design tokens to specific UI patterns.
+ *  Use THESE in your components, never raw values directly.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Buttons */
+  --btn-primary-bg:       var(--color-primary);
+  --btn-primary-bg-hover: var(--color-primary-hover);
+  --btn-primary-text:     var(--raw-cream-50);
+
+  --btn-accent-bg:        var(--color-accent);
+  --btn-accent-bg-hover:  var(--color-accent-hover);
+  --btn-accent-text:      var(--raw-cream-50);
+
+  --btn-ghost-text:       var(--color-text);
+  --btn-ghost-border:     var(--color-border-strong);
+
+  /* Navigation */
+  --nav-bg:               var(--color-surface);
+  --nav-text:             var(--color-text);
+  --nav-text-active:      var(--color-primary);
+  --nav-border:           var(--color-border);
+
+  /* Cards / Product tiles */
+  --card-bg:              var(--color-surface);
+  --card-border:          var(--color-border);
+  --card-shadow:          var(--shadow-md);
+  --card-text:            var(--color-text);
+  --card-text-muted:      var(--color-text-muted);
+
+  /* Price / badges */
+  --badge-sale-bg:        var(--color-accent-subtle);
+  --badge-sale-text:      var(--color-accent);
+  --badge-new-bg:         var(--color-primary-subtle);
+  --badge-new-text:       var(--color-primary);
+
+  /* Inputs / Forms */
+  --input-bg:             var(--color-surface);
+  --input-border:         var(--color-border);
+  --input-border-focus:   var(--color-primary);
+  --input-text:           var(--color-text);
+  --input-placeholder:    var(--color-text-subtle);
+
+  /* Footer */
+  --footer-bg:            var(--raw-charcoal-400);
+  --footer-text:          var(--raw-cream-200);
+  --footer-text-muted:    var(--raw-gray-winter-500);
+  --footer-border:        var(--raw-charcoal-200);
+
+  /* Seasonal banner / promo strip */
+  --promo-bg:             var(--raw-green-700);
+  --promo-text:           var(--raw-cream-50);
+  --promo-accent:         var(--raw-rust-300);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  UTILITY CLASSES  (optional — handy for quick one-offs)
+ * ═══════════════════════════════════════════════════════════════════ */
+
+.text-brand-green   { color: var(--raw-green-700); }
+.text-brand-rust    { color: var(--raw-rust-500); }
+.text-brand-midnight{ color: var(--raw-blue-700); }
+.text-brand-cream   { color: var(--raw-cream-100); }
+
+.bg-brand-green     { background-color: var(--raw-green-700); }
+.bg-brand-rust      { background-color: var(--raw-rust-500); }
+.bg-brand-midnight  { background-color: var(--raw-blue-700); }
+.bg-brand-cream     { background-color: var(--raw-cream-100); }
+
+.border-brand       { border-color: var(--color-border-strong); }
+.shadow-brand       { box-shadow: var(--shadow-md); }

@@ -28,7 +28,7 @@ export default function ProductTypeSelector({ selectedType, onChange }: Props) {
               className={`px-4 py-2 text-sm rounded border transition-colors ${
                 isSelected
                   ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-bg)]"
-                  : "border-[color-mix(in_srgb,var(--color-muted)_30%,transparent)] text-[var(--color-muted)] hover:border-[var(--color-muted)]"
+                  : "border-[color-mix(in_srgb,var(--color-text-muted)_30%,transparent)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]"
               }`}
             >
               {PRODUCT_TYPE_LABELS[type]} — {formatPrice(PRICES[type])}

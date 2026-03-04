@@ -47,7 +47,7 @@ export default function EmailCapture() {
         className="flex-1 px-4 py-3 rounded border text-sm"
         style={{
           backgroundColor: "var(--color-bg)",
-          borderColor: "color-mix(in srgb, var(--color-muted) 30%, transparent)",
+          borderColor: "color-mix(in srgb, var(--color-text-muted) 30%, transparent)",
           color: "var(--color-text)",
         }}
       />

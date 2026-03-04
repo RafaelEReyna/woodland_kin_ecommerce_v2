@@ -6,19 +6,19 @@ const footerLinks = [
 ];
 ---
 
-<footer class="border-t border-theme-muted/30 mt-auto">
+<footer class="border-t border-theme-text-muted/30 mt-auto">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="flex flex-wrap justify-center gap-6 mb-6">
       {footerLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm tracking-wide text-theme-muted hover:text-theme-text transition-colors"
+          class="text-sm tracking-wide text-theme-text-muted hover:text-theme-text transition-colors"
         >
           {link.label}
         </a>
       ))}
     </nav>
-    <p class="text-center text-xs text-theme-muted">
+    <p class="text-center text-xs text-theme-text-muted">
       &copy; 2026 Woodland Kin. Big Bear Valley, CA.
     </p>
   </div>

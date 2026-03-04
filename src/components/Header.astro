@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-theme-bg/95 backdrop-blur-sm border-b border-theme-muted/20">
+<header class="sticky top-0 z-50 bg-theme-surface/95 backdrop-blur-sm border-b border-theme-border">
   <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <!-- Logo -->
     <a href="/" class="text-lg font-semibold tracking-widest text-theme-text">
@@ -21,7 +21,7 @@ const navLinks = [
         <li>
           <a
             href={link.href}
-            class="text-sm tracking-wide text-theme-muted hover:text-theme-text transition-colors"
+            class="text-sm tracking-wide text-theme-text-muted hover:text-theme-text transition-colors"
           >
             {link.label}
           </a>
@@ -43,13 +43,13 @@ const navLinks = [
 
   <!-- Mobile Menu (CSS-only toggle) -->
   <input type="checkbox" id="mobile-menu-toggle" class="hidden peer" aria-hidden="true" />
-  <div class="hidden peer-checked:block md:hidden border-t border-theme-muted/20 bg-theme-bg">
+  <div class="hidden peer-checked:block md:hidden border-t border-theme-text-muted/20 bg-theme-bg">
     <ul class="px-4 py-4 space-y-3">
       {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
-            class="block text-sm tracking-wide text-theme-muted hover:text-theme-text transition-colors"
+            class="block text-sm tracking-wide text-theme-text-muted hover:text-theme-text transition-colors"
           >
             {link.label}
           </a>

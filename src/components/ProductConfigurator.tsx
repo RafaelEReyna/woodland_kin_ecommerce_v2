@@ -40,7 +40,7 @@ export default function ProductConfigurator({ designSlug, designName }: Props) {
   return (
     <div>
       <h1 className="text-2xl md:text-3xl font-bold">{designName}</h1>
-      <p className="mt-2 text-xl text-[var(--color-muted)]">{formatPrice(price)}</p>
+      <p className="mt-2 text-xl text-[var(--color-text-muted)]">{formatPrice(price)}</p>
 
       <div className="mt-8 space-y-6">
         <ProductTypeSelector selectedType={productType} onChange={handleProductTypeChange} />

@@ -41,11 +41,11 @@ export default function CartDrawer() {
       {/* Drawer */}
       <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[var(--color-bg)] shadow-xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[color-mix(in_srgb,var(--color-muted)_20%,transparent)]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[color-mix(in_srgb,var(--color-text-muted)_20%,transparent)]">
           <h2 className="text-lg font-semibold">Cart</h2>
           <button
             onClick={() => setOpen(false)}
-            className="text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+            className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
             aria-label="Close cart"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -57,7 +57,7 @@ export default function CartDrawer() {
         {/* Items */}
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
-            <p className="text-[var(--color-muted)] text-sm text-center mt-10">
+            <p className="text-[var(--color-text-muted)] text-sm text-center mt-10">
               Your cart is empty.
             </p>
           ) : (
@@ -66,12 +66,12 @@ export default function CartDrawer() {
                 <li key={item.variantId} className="flex gap-4">
                   {/* Item Image Placeholder */}
                   <div className="w-16 h-16 shrink-0 bg-[var(--color-surface)] rounded flex items-center justify-center">
-                    <span className="text-[var(--color-muted)] text-[10px]">IMG</span>
+                    <span className="text-[var(--color-text-muted)] text-[10px]">IMG</span>
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{item.designName}</p>
-                    <p className="text-xs text-[var(--color-muted)]">
+                    <p className="text-xs text-[var(--color-text-muted)]">
                       {item.productType === "long_sleeve" ? "Long Sleeve" : item.productType === "hoodie" ? "Hoodie" : "Tee"} / {item.color} / {item.size}
                     </p>
 
@@ -80,7 +80,7 @@ export default function CartDrawer() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => updateQty(item.variantId, item.qty - 1)}
-                          className="w-6 h-6 text-xs border border-[color-mix(in_srgb,var(--color-muted)_30%,transparent)] rounded flex items-center justify-center text-[var(--color-muted)] hover:text-[var(--color-text)]"
+                          className="w-6 h-6 text-xs border border-[color-mix(in_srgb,var(--color-text-muted)_30%,transparent)] rounded flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                           aria-label="Decrease quantity"
                         >
                           -
@@ -88,7 +88,7 @@ export default function CartDrawer() {
                         <span className="text-sm w-4 text-center">{item.qty}</span>
                         <button
                           onClick={() => updateQty(item.variantId, item.qty + 1)}
-                          className="w-6 h-6 text-xs border border-[color-mix(in_srgb,var(--color-muted)_30%,transparent)] rounded flex items-center justify-center text-[var(--color-muted)] hover:text-[var(--color-text)]"
+                          className="w-6 h-6 text-xs border border-[color-mix(in_srgb,var(--color-text-muted)_30%,transparent)] rounded flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                           aria-label="Increase quantity"
                         >
                           +
@@ -99,7 +99,7 @@ export default function CartDrawer() {
                         <span className="text-sm">{formatPrice(item.price * item.qty)}</span>
                         <button
                           onClick={() => removeFromCart(item.variantId)}
-                          className="text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+                          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
                           aria-label={`Remove ${item.designName}`}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -117,12 +117,12 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-[color-mix(in_srgb,var(--color-muted)_20%,transparent)] px-6 py-4 space-y-4">
+          <div className="border-t border-[color-mix(in_srgb,var(--color-text-muted)_20%,transparent)] px-6 py-4 space-y-4">
             {/* Free Shipping Progress */}
             <div>
               {freeShippingRemaining > 0 ? (
                 <>
-                  <p className="text-xs text-[var(--color-muted)] mb-2">
+                  <p className="text-xs text-[var(--color-text-muted)] mb-2">
                     {formatPrice(freeShippingRemaining)} away from free shipping
                   </p>
                   <div className="w-full h-1.5 bg-[var(--color-surface)] rounded-full overflow-hidden">
@@ -179,7 +179,7 @@ export default function CartDrawer() {
 
             <button
               onClick={() => setOpen(false)}
-              className="w-full py-2 text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+              className="w-full py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
             >
               Continue Shopping
             </button>

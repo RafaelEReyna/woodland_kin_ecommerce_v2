@@ -18,7 +18,7 @@ export default function ColorSelector({ colors, selectedColor, onChange }: Props
   return (
     <div>
       <h3 className="text-sm font-medium mb-3">
-        Color — <span className="text-[var(--color-muted)]">{selectedColor}</span>
+        Color — <span className="text-[var(--color-text-muted)]">{selectedColor}</span>
       </h3>
       <div className="flex gap-3">
         {colors.map((color) => {
@@ -32,7 +32,7 @@ export default function ColorSelector({ colors, selectedColor, onChange }: Props
               className={`w-8 h-8 rounded-full transition-shadow ${
                 isSelected
                   ? "ring-2 ring-[var(--color-accent)] ring-offset-2"
-                  : "hover:ring-2 hover:ring-[var(--color-muted)] hover:ring-offset-1"
+                  : "hover:ring-2 hover:ring-[var(--color-text-muted)] hover:ring-offset-1"
               }`}
               style={{
                 backgroundColor: COLOR_MAP[color] || "#888",

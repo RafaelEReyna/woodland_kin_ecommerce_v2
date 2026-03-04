@@ -19,7 +19,7 @@ export default function SizeSelector({ selectedSize, onChange }: Props) {
               className={`px-3 py-1.5 text-sm rounded border transition-colors ${
                 isSelected
                   ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-bg)]"
-                  : "border-[color-mix(in_srgb,var(--color-muted)_30%,transparent)] text-[var(--color-muted)] hover:border-[var(--color-muted)]"
+                  : "border-[color-mix(in_srgb,var(--color-text-muted)_30%,transparent)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]"
               }`}
             >
               {size}

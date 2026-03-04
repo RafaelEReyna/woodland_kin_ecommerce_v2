@@ -35,12 +35,12 @@ const faqs = [
 
     <div class="space-y-4">
       {faqs.map((faq) => (
-        <details class="group border border-theme-muted/20 rounded-lg">
+        <details class="group border border-theme-text-muted/20 rounded-lg">
           <summary class="flex items-center justify-between cursor-pointer px-6 py-4 text-sm font-medium select-none">
             <span>{faq.question}</span>
-            <span class="ml-4 shrink-0 text-theme-muted transition-transform group-open:rotate-45">+</span>
+            <span class="ml-4 shrink-0 text-theme-text-muted transition-transform group-open:rotate-45">+</span>
           </summary>
-          <div class="px-6 pb-4 text-sm text-theme-muted leading-relaxed">
+          <div class="px-6 pb-4 text-sm text-theme-text-muted leading-relaxed">
             {faq.answer}
           </div>
         </details>

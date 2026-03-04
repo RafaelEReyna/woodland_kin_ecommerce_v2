@@ -11,7 +11,7 @@ export default function CartIcon() {
   return (
     <button
       onClick={handleClick}
-      className="relative text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+      className="relative text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
       aria-label={`Cart: ${count} items`}
     >
       <svg
