@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProductConfigurator from "../../components/ProductConfigurator";
 import { getCollection, render } from "astro:content";
+import { MOCKUP_IMAGES } from "../../data/mockup-images";
 
 export async function getStaticPaths() {
   const designs = await getCollection("designs");
@@ -15,6 +16,16 @@ const { design } = Astro.props;
 const { Content } = await render(design);
 const slug = design.id.replace(/\.md$/, "");
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://woodlandkin.com";
+
+// Filter mockup images for this design
+const designMockups: Record<string, string> = {};
+for (const [key, path] of Object.entries(MOCKUP_IMAGES)) {
+  if (key.startsWith(slug + "/")) {
+    designMockups[key] = path;
+  }
+}
+// Initial image: tee-black (default selections)
+const initialImage = designMockups[`${slug}/tee-black`] || design.data.featured_image;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,7 +51,7 @@ const jsonLd = {
     <div class="grid md:grid-cols-2 gap-12 items-start">
       <!-- Left: Hero Mockup -->
       <div class="aspect-square bg-theme-surface rounded-lg overflow-hidden">
-        <img src={design.data.featured_image} alt={`${design.data.name} mockup`} class="w-full h-full object-cover" />
+        <img id="product-hero" src={initialImage} alt={`${design.data.name} mockup`} class="w-full h-full object-cover" />
       </div>
 
       <!-- Right: Product Configurator -->
@@ -50,6 +61,8 @@ const jsonLd = {
           client:load
           designSlug={slug}
           designName={design.data.name}
+          mockupImages={designMockups}
+          fallbackImage={design.data.featured_image}
         />
       </div>
     </div>
@@ -61,4 +74,12 @@ const jsonLd = {
       </div>
     </div>
   </section>
+<script>
+  window.addEventListener("product-image-change", (e: Event) => {
+    const img = document.getElementById("product-hero") as HTMLImageElement | null;
+    if (img && e instanceof CustomEvent) {
+      img.src = e.detail.src;
+    }
+  });
+</script>
 </BaseLayout>

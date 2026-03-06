@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductTypeSelector from "./ProductTypeSelector";
 import ColorSelector from "./ColorSelector";
 import SizeSelector from "./SizeSelector";
@@ -10,9 +10,11 @@ import type { ProductType } from "../lib/pricing";
 interface Props {
   designSlug: string;
   designName: string;
+  mockupImages: Record<string, string>;
+  fallbackImage: string;
 }
 
-export default function ProductConfigurator({ designSlug, designName }: Props) {
+export default function ProductConfigurator({ designSlug, designName, mockupImages, fallbackImage }: Props) {
   const [productType, setProductType] = useState<ProductType>("tee");
   const [color, setColor] = useState("Black");
   const [size, setSize] = useState("M");
@@ -21,6 +23,16 @@ export default function ProductConfigurator({ designSlug, designName }: Props) {
   const availableColors = getColorsForProductType(productType);
   const price = getPrice(productType);
   const variantId = generateVariantId(designSlug, productType, color, size);
+
+  const normalizedColor = color.toLowerCase().replace(/\s+/g, "-");
+  const imageKey = `${designSlug}/${productType}-${normalizedColor}`;
+  const currentImage = mockupImages[imageKey] || fallbackImage;
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("product-image-change", { detail: { src: currentImage } })
+    );
+  }, [currentImage]);
 
   function handleProductTypeChange(newType: ProductType) {
     setProductType(newType);

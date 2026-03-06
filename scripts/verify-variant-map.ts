@@ -12,6 +12,8 @@ const DESIGN_SLUGS = [
   "bear-valley-crest",
   "pine-ridge-sunset",
   "woodland-original",
+  "moonridge-both-mountains",
+  "fawnskin-beer",
 ];
 
 const PLACEHOLDER_RANGE_MIN = 100000;
