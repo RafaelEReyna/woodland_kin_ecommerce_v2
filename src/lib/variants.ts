@@ -8,6 +8,15 @@ export const COLORS_BY_PRODUCT_TYPE: Record<ProductType, readonly string[]> = {
   hoodie: ["Black", "Navy", "Forest Green", "Charcoal"] as const,
 };
 
+const DESIGN_COLOR_OVERRIDES: Record<string, Partial<Record<ProductType, readonly string[]>>> = {
+  "moonridge-both-mountains": {
+    hoodie: ["Black", "Navy", "Forest Green", "Charcoal", "Indigo Blue", "Graphite Heather", "Military Green", "Sand"],
+  },
+  "pine-ridge-sunset": {
+    long_sleeve: ["Black", "Navy", "Forest Green", "Military Green", "Sand"],
+  },
+};
+
 export const SIZES = ["S", "M", "L", "XL", "2XL", "3XL"] as const;
 
 export type Variant = {
@@ -18,7 +27,11 @@ export type Variant = {
   size: string;
 };
 
-export function getColorsForProductType(productType: ProductType): readonly string[] {
+export function getColorsForProductType(productType: ProductType, designSlug?: string): readonly string[] {
+  if (designSlug) {
+    const override = DESIGN_COLOR_OVERRIDES[designSlug]?.[productType];
+    if (override) return override;
+  }
   return COLORS_BY_PRODUCT_TYPE[productType];
 }
 
@@ -36,7 +49,7 @@ export function generateVariantId(
 export function generateAllVariants(designSlug: string): Variant[] {
   const variants: Variant[] = [];
   for (const productType of PRODUCT_TYPES) {
-    for (const color of COLORS_BY_PRODUCT_TYPE[productType]) {
+    for (const color of getColorsForProductType(productType, designSlug)) {
       for (const size of SIZES) {
         variants.push({
           variantId: generateVariantId(designSlug, productType, color, size),

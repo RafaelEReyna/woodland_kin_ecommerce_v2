@@ -6,6 +6,7 @@
  *
  * Populated from Printful API on Mar 4, 2026 (original 3 designs).
  * Updated Mar 5, 2026: Added moonridge-both-mountains and fawnskin-beer.
+ * Updated Mar 31, 2026: Added moonridge hoodie extra colors and fox-farm longsleeve Sand.
  */
 export const PRINTFUL_VARIANT_MAP: Record<string, number> = {
   // ==========================================
@@ -159,6 +160,11 @@ export const PRINTFUL_VARIANT_MAP: Record<string, number> = {
   "pine-ridge-sunset-long_sleeve-military-green-xl": 5219736906,
   "pine-ridge-sunset-long_sleeve-military-green-2xl": 5219736907,
   "pine-ridge-sunset-long_sleeve-military-green-3xl": 5219736908,
+  "pine-ridge-sunset-long_sleeve-sand-s": 5219736909,
+  "pine-ridge-sunset-long_sleeve-sand-m": 5219736910,
+  "pine-ridge-sunset-long_sleeve-sand-l": 5219736911,
+  "pine-ridge-sunset-long_sleeve-sand-xl": 5219736912,
+  "pine-ridge-sunset-long_sleeve-sand-2xl": 5219736913,
 
   // ==========================================
   // Pine Ridge Sunset — Hoodie (24 variants)
@@ -367,6 +373,30 @@ export const PRINTFUL_VARIANT_MAP: Record<string, number> = {
   "moonridge-both-mountains-hoodie-charcoal-xl": 5221441108,
   "moonridge-both-mountains-hoodie-charcoal-2xl": 5221441110,
   "moonridge-both-mountains-hoodie-charcoal-3xl": 5221441113,
+  "moonridge-both-mountains-hoodie-indigo-blue-s": 5221441115,
+  "moonridge-both-mountains-hoodie-indigo-blue-m": 5221441117,
+  "moonridge-both-mountains-hoodie-indigo-blue-l": 5221441119,
+  "moonridge-both-mountains-hoodie-indigo-blue-xl": 5221441121,
+  "moonridge-both-mountains-hoodie-indigo-blue-2xl": 5221441123,
+  "moonridge-both-mountains-hoodie-indigo-blue-3xl": 5221441125,
+  "moonridge-both-mountains-hoodie-graphite-heather-s": 5221441127,
+  "moonridge-both-mountains-hoodie-graphite-heather-m": 5221441129,
+  "moonridge-both-mountains-hoodie-graphite-heather-l": 5221441132,
+  "moonridge-both-mountains-hoodie-graphite-heather-xl": 5221441134,
+  "moonridge-both-mountains-hoodie-graphite-heather-2xl": 5221441136,
+  "moonridge-both-mountains-hoodie-graphite-heather-3xl": 5221441138,
+  "moonridge-both-mountains-hoodie-military-green-s": 5221441140,
+  "moonridge-both-mountains-hoodie-military-green-m": 5221441142,
+  "moonridge-both-mountains-hoodie-military-green-l": 5221441144,
+  "moonridge-both-mountains-hoodie-military-green-xl": 5221441147,
+  "moonridge-both-mountains-hoodie-military-green-2xl": 5221441149,
+  "moonridge-both-mountains-hoodie-military-green-3xl": 5221441151,
+  "moonridge-both-mountains-hoodie-sand-s": 5221441153,
+  "moonridge-both-mountains-hoodie-sand-m": 5221441155,
+  "moonridge-both-mountains-hoodie-sand-l": 5221441157,
+  "moonridge-both-mountains-hoodie-sand-xl": 5221441159,
+  "moonridge-both-mountains-hoodie-sand-2xl": 5221441161,
+  "moonridge-both-mountains-hoodie-sand-3xl": 5221441164,
 
   // ==========================================
   // Fawnskin Beer — Tee (30 variants)

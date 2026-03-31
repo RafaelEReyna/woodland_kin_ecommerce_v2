@@ -20,7 +20,7 @@ export default function ProductConfigurator({ designSlug, designName, mockupImag
   const [size, setSize] = useState("M");
   const [feedback, setFeedback] = useState("");
 
-  const availableColors = getColorsForProductType(productType);
+  const availableColors = getColorsForProductType(productType, designSlug);
   const price = getPrice(productType);
   const variantId = generateVariantId(designSlug, productType, color, size);
 
@@ -43,7 +43,7 @@ export default function ProductConfigurator({ designSlug, designName, mockupImag
 
   function handleProductTypeChange(newType: ProductType) {
     setProductType(newType);
-    const newColors = getColorsForProductType(newType);
+    const newColors = getColorsForProductType(newType, designSlug);
     if (!newColors.includes(color)) {
       setColor(newColors[0]);
     }
