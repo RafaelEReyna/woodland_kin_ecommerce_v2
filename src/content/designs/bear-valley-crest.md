@@ -1,12 +1,12 @@
 ---
-name: "Bear Valley Crest"
+name: "Big Bear City Beer"
 story: "The original Big Bear emblem — a nod to the families who built this town and the valley that raised them."
 featured_image: "/images/designs/bear-valley-crest.png"
 active: true
 order: 1
 ---
 
-## Bear Valley Crest
+## Big Bear City Beer
 
 The Bear Valley Crest started as a sketch on a napkin at Teddy Bear Restaurant. A local artist, inspired by the old forestry emblems and mountain town signage that dot Highway 18, wanted to create something that felt official — like it had always been here.
 
