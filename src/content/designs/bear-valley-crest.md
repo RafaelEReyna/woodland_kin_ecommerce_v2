@@ -1,5 +1,5 @@
 ---
-name: "Big Bear City Beer Tee"
+name: "Big Bear City Beer"
 story: "The original Big Bear emblem — a nod to the families who built this town and the valley that raised them."
 featured_image: "/images/designs/bear-valley-crest.png"
 active: true

@@ -24,6 +24,13 @@ export default function ProductConfigurator({ designSlug, designName, mockupImag
   const price = getPrice(productType);
   const variantId = generateVariantId(designSlug, productType, color, size);
 
+  const productTypeLabels: Record<ProductType, string> = {
+    tee: "Tee",
+    long_sleeve: "Long Sleeve",
+    hoodie: "Hoodie",
+  };
+  const displayName = `${designName} ${productTypeLabels[productType]}`;
+
   const normalizedColor = color.toLowerCase().replace(/\s+/g, "-");
   const imageKey = `${designSlug}/${productType}-${normalizedColor}`;
   const currentImage = mockupImages[imageKey] || fallbackImage;
@@ -51,7 +58,7 @@ export default function ProductConfigurator({ designSlug, designName, mockupImag
 
   return (
     <div>
-      <h1 className="text-2xl md:text-3xl font-bold">{designName}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold">{displayName}</h1>
       <p className="mt-2 text-xl text-[var(--color-text-muted)]">{formatPrice(price)}</p>
 
       <div className="mt-8 space-y-6">
