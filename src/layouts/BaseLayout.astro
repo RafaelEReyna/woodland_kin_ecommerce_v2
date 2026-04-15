@@ -9,9 +9,10 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  preloadImage?: string;
 }
 
-const { title, description = "Mountain rooted apparel from Big Bear Valley, CA.", ogImage = "/og-default.jpg" } = Astro.props;
+const { title, description = "Mountain rooted apparel from Big Bear Valley, CA.", ogImage = "/og-default.jpg", preloadImage } = Astro.props;
 const theme = getTheme();
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://woodlandkin.com";
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
@@ -42,11 +43,30 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://js.stripe.com" />
-    <link rel="preconnect" href="https://static.klaviyo.com" />
+
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
 
     <title>{title}</title>
     {import.meta.env.PUBLIC_KLAVIYO_PUBLIC_KEY && (
-      <script async src={`https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${import.meta.env.PUBLIC_KLAVIYO_PUBLIC_KEY}`}></script>
+      <script is:inline define:vars={{ klaviyoId: import.meta.env.PUBLIC_KLAVIYO_PUBLIC_KEY }}>
+        (function () {
+          function loadKlaviyo() {
+            if (window.__klaviyoLoaded) return;
+            window.__klaviyoLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=' + klaviyoId;
+            document.head.appendChild(s);
+          }
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadKlaviyo, { timeout: 4000 });
+          } else {
+            window.addEventListener('load', function () { setTimeout(loadKlaviyo, 1500); }, { once: true });
+          }
+        })();
+      </script>
     )}
   </head>
   <body class="min-h-screen flex flex-col bg-theme-bg text-theme-text">
@@ -58,6 +78,6 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
       <slot />
     </main>
     <Footer />
-    <CartDrawer client:load />
+    <CartDrawer client:idle />
   </body>
 </html>

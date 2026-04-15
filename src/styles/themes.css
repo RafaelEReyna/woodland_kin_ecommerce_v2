@@ -77,14 +77,15 @@
 
   /* ── Text ────────────────────────────────────────────────── */
   --color-text:          var(--raw-charcoal-300); /* #2E2E2B — warm near-black (not cold) */
-  --color-text-muted:    #7A6D5C;                 /* warm brownish gray */
-  --color-text-subtle:   #A39585;                 /* placeholder, disabled */
+  --color-text-muted:    #5A4E42;                 /* warm brownish gray — AA on cream/aged-paper */
+  --color-text-subtle:   #7A6D5C;                 /* placeholder, disabled */
   --color-text-inverse:  var(--raw-cream-100);    /* for dark backgrounds */
 
   /* ── Brand Accents ───────────────────────────────────────── */
   --color-accent:        var(--raw-rust-500);     /* #9B4A2E — Americana rust (REPLACES lilac) */
   --color-accent-hover:  var(--raw-rust-700);     /* #8B3520 — darker on hover */
   --color-accent-subtle: var(--raw-rust-100);     /* #EDD5C5 — tinted bg for badges/tags */
+  --color-accent-text:   var(--raw-rust-700);     /* #8B3520 — AA-safe on cream/aged-paper */
 
   --color-primary:       var(--raw-green-700);    /* #2F5233 — forest green — CTAs, links */
   --color-primary-hover: var(--raw-green-900);    /* #1A2E1C — hover state */
@@ -137,6 +138,7 @@
   --color-accent:        var(--raw-rust-300);     /* #C47B5A — copper/ember (reads well on dark) */
   --color-accent-hover:  var(--raw-rust-500);     /* #9B4A2E */
   --color-accent-subtle: rgba(155, 74, 46, 0.15); /* very dark rust tint */
+  --color-accent-text:   var(--raw-rust-300);     /* #C47B5A — AA-safe on near-black */
 
   --color-primary:       var(--raw-green-300);    /* #7FAF8A — lighter sage (accessible on dark) */
   --color-primary-hover: var(--raw-green-500);    /* #4A7C59 */

@@ -1,7 +1,7 @@
 ---
 name: "Moonridge Both Mountains"
 story: "A tribute to the twin peaks that watch over Big Bear — because up here, the mountains are always part of the conversation."
-featured_image: "/images/designs/moonridge-both-mountains.png"
+featured_image: "/images/designs/moonridge-both-mountains.webp"
 active: true
 order: 4
 ---

@@ -1,7 +1,7 @@
 ---
 name: "Bear Liberty"
 story: "The founding design — simple wordmark, clean lines. The one that started everything."
-featured_image: "/images/designs/woodland-original.png"
+featured_image: "/images/designs/woodland-original.webp"
 active: true
 order: 3
 ---

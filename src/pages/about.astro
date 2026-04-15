@@ -7,7 +7,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h1 class="text-3xl md:text-4xl font-bold mb-10">About Woodland Kin</h1>
 
     <div class="aspect-[21/9] rounded-lg overflow-hidden mb-12">
-      <img src="/images/hero/three-friends-snow-dog-big-bear-lake.JPG" alt="Eddie, Natalie, and Jon in the snow at Big Bear Lake" class="w-full h-full object-cover" />
+      <img
+        src="/images/hero/three-friends-snow-dog-big-bear-lake.JPG"
+        alt="Eddie, Natalie, and Jon in the snow at Big Bear Lake"
+        width="1680"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="w-full h-full object-cover"
+      />
     </div>
 
     <div class="space-y-6 text-theme-text-muted leading-relaxed">

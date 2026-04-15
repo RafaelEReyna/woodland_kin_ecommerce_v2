@@ -10,28 +10,129 @@ const designs = (await getCollection("designs"))
   .slice(0, 4);
 ---
 
-<BaseLayout title="Woodland Kin — Mountain Rooted Apparel">
+<BaseLayout
+  title="Woodland Kin — Mountain Rooted Apparel"
+  preloadImage="/images/hero/foggy-mountain-peaks-evergreen-forest.jpeg"
+>
   <!-- Hero -->
   <section class="hero grain-overlay">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center relative z-10">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-        Mountain Rooted. Community Worn.
-      </h1>
-      <p class="mt-6 text-lg md:text-xl text-theme-text-muted max-w-2xl mx-auto">
-        Apparel for families who find themselves in the forest. Designed in Big Bear Valley, CA — worn by the people who call the mountain home.
-      </p>
-      <a
-        href="/shop"
-        class="inline-block mt-10 px-8 py-3 bg-theme-accent text-theme-bg text-sm font-medium tracking-wide rounded hover:opacity-90 transition-opacity"
-      >
-        Shop the Collection
-      </a>
+    <img
+      src="/images/hero/foggy-mountain-peaks-evergreen-forest.jpeg"
+      alt=""
+      width="1400"
+      height="900"
+      fetchpriority="high"
+      decoding="async"
+      class="hero-bg"
+    />
+    <!-- Fog layers -->
+    <div class="hero-fog" aria-hidden="true">
+      <div class="hero-fog__layer hero-fog__layer--1"></div>
+      <div class="hero-fog__layer hero-fog__layer--2"></div>
+      <div class="hero-fog__layer hero-fog__layer--3"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-[55%_45%] items-center min-h-[90vh] py-20 lg:py-0 gap-12 lg:gap-0">
+
+      <!-- Left: Text -->
+      <div class="text-center lg:text-left">
+        <p class="hero-stagger hero-stagger-1 text-xs sm:text-sm tracking-[0.25em] uppercase" style="color: var(--raw-cream-300);">
+          Est. 2026 &middot; Big Bear Valley, CA
+        </p>
+        <h1 class="hero-stagger hero-stagger-2 mt-5 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight" style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; color: var(--raw-cream-50);">
+          Mountain Rooted.<br />Community Worn.
+        </h1>
+        <p class="hero-stagger hero-stagger-3 mt-6 text-base sm:text-lg lg:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed" style="color: var(--raw-cream-200); opacity: 0.85;">
+          Apparel for families who find themselves in the forest. Designed in Big Bear Valley, CA — worn by the people who call the mountain home.
+        </p>
+        <div class="hero-stagger hero-stagger-4 mt-10">
+          <a href="/shop" class="btn-hero">
+            Shop the Collection
+            <span class="btn-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Floating Product Card Fan -->
+      <div class="hidden lg:block relative h-[500px] xl:h-[560px]">
+        <img
+          src="/images/designs/bear-valley-crest.webp"
+          alt="Bear Valley Crest design on tee"
+          width="320"
+          height="320"
+          loading="eager"
+          decoding="async"
+          class="hero-card hero-card-1 w-56 xl:w-64 top-[15%] left-[5%]"
+          style="--card-transform: rotate(-8deg); transform: rotate(-8deg);"
+        />
+        <img
+          src="/images/designs/pine-ridge-sunset.webp"
+          alt="Pine Ridge Sunset design on tee"
+          width="320"
+          height="320"
+          loading="lazy"
+          decoding="async"
+          class="hero-card hero-card-2 w-60 xl:w-72 top-[5%] left-[28%] z-10"
+          style="--card-transform: rotate(3deg); transform: rotate(3deg);"
+        />
+        <img
+          src="/images/designs/woodland-original.webp"
+          alt="Woodland Original design on tee"
+          width="320"
+          height="320"
+          loading="lazy"
+          decoding="async"
+          class="hero-card hero-card-3 w-52 xl:w-60 top-[25%] left-[52%] z-20"
+          style="--card-transform: rotate(10deg); transform: rotate(10deg);"
+        />
+      </div>
+
+      <!-- Mobile: Product Card Scroll Strip -->
+      <div class="flex lg:hidden gap-4 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 scrollbar-hide">
+        <img
+          src="/images/designs/bear-valley-crest.webp"
+          alt="Bear Valley Crest design"
+          width="240"
+          height="240"
+          loading="lazy"
+          decoding="async"
+          class="hero-stagger hero-stagger-3 w-[55vw] max-w-[220px] shrink-0 snap-center rounded-xl shadow-lg"
+        />
+        <img
+          src="/images/designs/pine-ridge-sunset.webp"
+          alt="Pine Ridge Sunset design"
+          width="240"
+          height="240"
+          loading="lazy"
+          decoding="async"
+          class="hero-stagger hero-stagger-3 w-[55vw] max-w-[220px] shrink-0 snap-center rounded-xl shadow-lg"
+          style="animation-delay: 400ms;"
+        />
+        <img
+          src="/images/designs/woodland-original.webp"
+          alt="Woodland Original design"
+          width="240"
+          height="240"
+          loading="lazy"
+          decoding="async"
+          class="hero-stagger hero-stagger-3 w-[55vw] max-w-[220px] shrink-0 snap-center rounded-xl shadow-lg"
+          style="animation-delay: 500ms;"
+        />
+      </div>
+
+    </div>
+
+    <!-- Mountain silhouette divider -->
+    <div class="mountain-divider">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 L0,42 Q60,38 120,34 Q180,30 240,28 Q320,24 400,22 Q440,21 480,24 Q520,27 560,30 Q600,33 640,28 Q680,23 720,18 Q760,13 800,10 Q840,7 880,12 Q920,17 960,22 Q1000,27 1040,24 Q1080,21 1120,18 Q1160,15 1200,20 Q1240,25 1280,30 Q1320,35 1360,38 Q1400,41 1440,44 L1440,60 Z" fill="var(--color-bg-subtle)" />
+      </svg>
     </div>
   </section>
 
   <!-- Brand Story -->
-  <section class="bg-theme-bg-subtle">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <section class="bg-theme-bg-subtle relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-28">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
         <h2 class="text-2xl md:text-3xl font-bold mb-6">Our Story</h2>
@@ -43,15 +144,28 @@ const designs = (await getCollection("designs"))
         </p>
       </div>
       <div class="aspect-[4/3] rounded-lg overflow-hidden">
-        <img src="/images/hero/forrest-sunbeam-pine-needles-big-bear-ca.jpeg" alt="Sunbeams through pine needles in Big Bear, California" class="w-full h-full object-cover" />
+        <img
+          src="/images/hero/forrest-sunbeam-pine-needles-big-bear-ca.jpeg"
+          alt="Sunbeams through pine needles in Big Bear, California"
+          width="800"
+          height="600"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
       </div>
     </div>
+    </div>
+    <div class="mountain-divider">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 L0,38 Q80,34 160,30 Q240,26 320,24 Q400,22 480,26 Q540,29 600,32 Q660,35 720,30 Q780,25 840,20 Q900,15 960,12 Q1020,9 1080,14 Q1140,19 1200,24 Q1260,29 1320,34 Q1380,38 1440,40 L1440,60 Z" fill="var(--color-bg)" />
+      </svg>
     </div>
   </section>
 
   <!-- Community Imagery -->
-  <section class="bg-theme-bg">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <section class="bg-theme-bg relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-28">
       <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">The Community</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
@@ -68,11 +182,16 @@ const designs = (await getCollection("designs"))
         ))}
       </div>
     </div>
+    <div class="mountain-divider">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 L0,36 Q100,32 200,28 Q280,25 360,22 Q420,20 480,18 Q540,16 600,20 Q660,24 720,28 Q780,32 840,26 Q900,20 960,16 Q1020,12 1080,16 Q1140,20 1200,26 Q1280,32 1360,36 Q1400,38 1440,42 L1440,60 Z" fill="var(--color-bg-subtle)" />
+      </svg>
+    </div>
   </section>
 
   <!-- Featured Designs -->
-  <section class="bg-theme-bg-subtle">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <section class="bg-theme-bg-subtle relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-28">
     <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Featured Designs</h2>
     <p class="text-theme-text-muted text-center mb-12">20 designs. Rooted in the mountain.</p>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -87,11 +206,16 @@ const designs = (await getCollection("designs"))
     <div class="text-center mt-10">
       <a
         href="/shop"
-        class="text-sm font-medium text-theme-accent hover:underline"
+        class="text-sm font-medium text-theme-accent-text hover:underline"
       >
         View All &rarr;
       </a>
     </div>
+    </div>
+    <div class="mountain-divider">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 L0,44 Q60,40 120,36 Q200,31 280,28 Q360,25 440,22 Q500,20 560,24 Q620,28 680,32 Q740,36 800,30 Q860,24 920,18 Q980,12 1040,10 Q1100,8 1160,14 Q1220,20 1280,26 Q1340,32 1400,38 L1440,42 L1440,60 Z" fill="var(--color-bg)" />
+      </svg>
     </div>
   </section>
 

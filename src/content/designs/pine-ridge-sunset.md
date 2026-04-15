@@ -1,7 +1,7 @@
 ---
 name: "Fox Farm Beer"
 story: "Inspired by the golden hour light that hits the ridge above Fawnskin every evening from May through September."
-featured_image: "/images/designs/pine-ridge-sunset.png"
+featured_image: "/images/designs/pine-ridge-sunset.webp"
 active: true
 order: 2
 ---

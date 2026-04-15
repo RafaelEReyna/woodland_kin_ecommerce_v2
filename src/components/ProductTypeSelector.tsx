@@ -25,7 +25,7 @@ export default function ProductTypeSelector({ selectedType, onChange }: Props) {
             <button
               key={type}
               onClick={() => onChange(type)}
-              className={`px-4 py-2 text-sm rounded border transition-colors ${
+              className={`min-h-[44px] px-4 py-2.5 text-sm rounded border transition-colors ${
                 isSelected
                   ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-bg)]"
                   : "border-[color-mix(in_srgb,var(--color-text-muted)_30%,transparent)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)]"

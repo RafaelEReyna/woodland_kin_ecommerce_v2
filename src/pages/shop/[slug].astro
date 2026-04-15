@@ -51,7 +51,17 @@ const jsonLd = {
     <div class="grid md:grid-cols-2 gap-12 items-start">
       <!-- Left: Hero Mockup -->
       <div class="aspect-square bg-theme-surface rounded-lg overflow-hidden">
-        <img id="product-hero" src={initialImage} alt={`${design.data.name} mockup`} class="w-full h-full object-cover" />
+        <img
+          id="product-hero"
+          src={initialImage}
+          alt={`${design.data.name} mockup`}
+          width="800"
+          height="800"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
       </div>
 
       <!-- Right: Product Configurator -->

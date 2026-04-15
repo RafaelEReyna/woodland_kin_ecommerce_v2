@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./themes.css";
+@import "@fontsource/fraunces/latin-700.css";
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -19,6 +20,7 @@
   --color-theme-accent: var(--color-accent);
   --color-theme-accent-hover: var(--color-accent-hover);
   --color-theme-accent-subtle: var(--color-accent-subtle);
+  --color-theme-accent-text: var(--color-accent-text);
   --color-theme-primary: var(--color-primary);
   --color-theme-primary-hover: var(--color-primary-hover);
   --color-theme-primary-subtle: var(--color-primary-subtle);
@@ -36,26 +38,250 @@
   --color-theme-info: var(--color-info);
 }
 
-/* Hero background image */
+/* Hero — background via <img> for LCP discoverability */
 .hero {
-  background-image: url('/images/hero/foggy-mountain-peaks-evergreen-forest.jpeg');
-  background-size: cover;
-  background-position: center 40%;
   position: relative;
+  overflow: hidden;
 }
 
-/* Hero gradient overlay */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  z-index: 0;
+}
+
+/* Hero gradient overlay — heavier left for text readability, lighter right for product cards */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(30, 31, 28, 0.65) 0%,
-    rgba(30, 31, 28, 0.40) 50%,
-    rgba(30, 31, 28, 0.55) 100%
-  );
+  background:
+    linear-gradient(
+      to right,
+      rgba(30, 31, 28, 0.78) 0%,
+      rgba(30, 31, 28, 0.60) 50%,
+      rgba(30, 31, 28, 0.45) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(30, 31, 28, 0.55) 0%,
+      rgba(30, 31, 28, 0.25) 50%,
+      rgba(30, 31, 28, 0.50) 100%
+    );
   z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  HERO FOG — 3 drifting wisp layers at different speeds/opacities
+ * ═══════════════════════════════════════════════════════════════════ */
+
+.hero-fog {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-fog__layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  will-change: transform;
+}
+
+/* Layer 1 — low, dense, slow drift right */
+.hero-fog__layer--1 {
+  bottom: 0;
+  height: 55%;
+  background-image:
+    radial-gradient(ellipse 600px 160px at 15% 80%, rgba(235, 230, 220, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 130px at 45% 65%, rgba(225, 220, 210, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 180px at 75% 75%, rgba(230, 225, 215, 0.40) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 120px at 95% 55%, rgba(235, 230, 220, 0.30) 0%, transparent 70%);
+  filter: blur(18px);
+  animation: fogDrift1 45s linear infinite;
+}
+
+/* Layer 2 — mid-height, wispy, slow drift left */
+.hero-fog__layer--2 {
+  bottom: 10%;
+  height: 55%;
+  background-image:
+    radial-gradient(ellipse 550px 120px at 20% 55%, rgba(240, 235, 225, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 650px 140px at 55% 70%, rgba(230, 225, 215, 0.30) 0%, transparent 65%),
+    radial-gradient(ellipse 450px 110px at 80% 50%, rgba(235, 230, 220, 0.25) 0%, transparent 65%);
+  filter: blur(24px);
+  animation: fogDrift2 60s linear infinite;
+}
+
+/* Layer 3 — high, thin, very slow drift right */
+.hero-fog__layer--3 {
+  bottom: 20%;
+  height: 45%;
+  background-image:
+    radial-gradient(ellipse 800px 100px at 30% 45%, rgba(242, 237, 227, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 90px at 70% 55%, rgba(238, 233, 223, 0.15) 0%, transparent 60%);
+  filter: blur(30px);
+  animation: fogDrift3 80s linear infinite;
+}
+
+@keyframes fogDrift1 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes fogDrift2 {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes fogDrift3 {
+  from { transform: translateX(-10%); }
+  to   { transform: translateX(-60%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fog__layer { animation: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  HERO ANIMATIONS
+ * ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes cardFanIn {
+    from {
+      opacity: 0;
+      transform: translateX(60px) rotate(0deg) scale(0.9);
+    }
+  }
+
+  @keyframes gentleDrift {
+    0%, 100% {
+      transform: var(--card-transform) translateY(0);
+    }
+    50% {
+      transform: var(--card-transform) translateY(-8px);
+    }
+  }
+
+  .hero-stagger {
+    opacity: 0;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .hero-stagger-1 { animation-delay: 0ms; }
+  .hero-stagger-2 { animation-delay: 150ms; }
+  .hero-stagger-3 { animation-delay: 300ms; }
+  .hero-stagger-4 { animation-delay: 450ms; }
+
+  .hero-card {
+    opacity: 0;
+    animation:
+      cardFanIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+      gentleDrift 7s ease-in-out infinite;
+  }
+  .hero-card-1 {
+    animation-delay: 0.5s, 1.3s;
+  }
+  .hero-card-2 {
+    animation-delay: 0.7s, 3.0s;
+  }
+  .hero-card-3 {
+    animation-delay: 0.9s, 5.2s;
+  }
+}
+
+/* Fallback for reduced motion — no animation, just show everything */
+@media (prefers-reduced-motion: reduce) {
+  .hero-stagger { opacity: 1; }
+  .hero-card { opacity: 1; }
+}
+
+/* ── Hero Card Base ──────────────────────────────────────────────── */
+
+.hero-card {
+  position: absolute;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(10, 12, 10, 0.35),
+    0 2px 8px rgba(10, 12, 10, 0.20);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
+}
+
+/* ── Hero CTA Button ─────────────────────────────────────────────── */
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background-color: var(--color-accent);
+  color: var(--raw-cream-50);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 14px rgba(155, 74, 46, 0.25);
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(155, 74, 46, 0.35);
+  background-color: var(--color-accent-hover);
+}
+
+.btn-hero .btn-arrow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-hero:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Mountain Silhouette Divider ─────────────────────────────────── */
+
+.mountain-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  line-height: 0;
+}
+
+.mountain-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Hide scrollbar on mobile card strip ─────────────────────────── */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Worn texture grain overlay */

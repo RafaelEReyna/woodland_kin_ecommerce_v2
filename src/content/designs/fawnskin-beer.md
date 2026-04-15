@@ -1,7 +1,7 @@
 ---
 name: "Fawnskin Beer"
 story: "For the north shore locals who know the best views come with a cold one and nowhere to be."
-featured_image: "/images/designs/fawnskin-beer.png"
+featured_image: "/images/designs/fawnskin-beer.webp"
 active: true
 order: 5
 ---
